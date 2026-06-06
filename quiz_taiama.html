@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Taiamã — Quanto você sabe sobre a ampliação?</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #2D6A4F;
+    --verde2: #40916C;
+    --verde3: #74C69D;
+    --verde-claro: #D8F3DC;
+    --dourado: #C9A84C;
+    --dourado2: #E9C46A;
+    --terra: #5C4033;
+    --agua: #1B4F72;
+    --agua2: #2E86AB;
+    --agua3: #A8DADC;
+    --branco: #FAFAF8;
+    --cinza: #6B7280;
+    --erro: #C62828;
+    --erro-bg: #FDECEA;
+    --certo-bg: #E8F5E9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--branco);
+    color: #1a1a1a;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* TELA INICIAL */
+  #tela-inicio {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background:
+      radial-gradient(ellipse at 20% 80%, #2D6A4F22 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, #1B4F7222 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 50%, #C9A84C11 0%, transparent 70%),
+      #FAFAF8;
+    position: relative;
+  }
+
+  .logo-reserva {
+    width: 80px;
+    height: 80px;
+    background: var(--verde);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 32px #2D6A4F40;
+    font-size: 36px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .inicio-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: 900;
+    color: var(--verde);
+    text-align: center;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .inicio-subtitulo {
+    font-size: 18px;
+    color: var(--cinza);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .inicio-credito {
+    font-size: 13px;
+    color: var(--cinza);
+    text-align: center;
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  .inicio-info {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .info-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px 22px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    min-width: 120px;
+  }
+
+  .info-card .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--verde);
+  }
+
+  .info-card .leg {
+    font-size: 12px;
+    color: var(--cinza);
+    margin-top: 2px;
+  }
+
+  .btn-iniciar {
+    background: var(--verde);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 16px 48px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 24px #2D6A4F40;
+    transition: all 0.25s;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-iniciar:hover {
+    background: var(--verde2);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px #2D6A4F50;
+  }
+
+  .aviso-fonte {
+    margin-top: 24px;
+    font-size: 12px;
+    color: var(--cinza);
+    text-align: center;
+    max-width: 500px;
+    line-height: 1.6;
+  }
+
+  /* TELA DO QUIZ */
+  #tela-quiz {
+    display: none;
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+
+  .quiz-header {
+    background: var(--verde);
+    color: white;
+    padding: 20px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+
+  .quiz-header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .quiz-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    opacity: 0.9;
+  }
+
+  .quiz-progresso-wrap {
+    flex: 1;
+    max-width: 300px;
+  }
+
+  .progresso-texto {
+    font-size: 12px;
+    opacity: 0.8;
+    margin-bottom: 4px;
+    text-align: right;
+  }
+
+  .barra-progresso {
+    height: 6px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .barra-fill {
+    height: 100%;
+    background: var(--dourado2);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-pontos {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dourado2);
+    white-space: nowrap;
+  }
+
+  /* CARD DA QUESTÃO */
+  .quiz-body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 20px;
+  }
+
+  .nivel-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .nivel-basico { background: #E8F5E9; color: #2E7D32; }
+  .nivel-intermediario { background: #FFF3E0; color: #E65100; }
+  .nivel-avancado { background: #EDE7F6; color: #4527A0; }
+
+  .questao-num {
+    font-size: 13px;
+    color: var(--cinza);
+    margin-bottom: 10px;
+  }
+
+  .questao-texto {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 3vw, 24px);
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.4;
+    margin-bottom: 28px;
+  }
+
+  .opcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .opcao {
+    background: white;
+    border: 2px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 16px;
+    color: #1a1a1a;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.5;
+  }
+
+  .opcao:hover:not(:disabled) {
+    border-color: var(--verde2);
+    background: #F0FDF4;
+    transform: translateX(4px);
+  }
+
+  .opcao .letra {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #F3F4F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--cinza);
+    transition: all 0.2s;
+  }
+
+  .opcao:hover:not(:disabled) .letra {
+    background: var(--verde);
+    color: white;
+  }
+
+  .opcao.correta {
+    border-color: var(--verde2);
+    background: var(--certo-bg);
+  }
+
+  .opcao.correta .letra {
+    background: var(--verde);
+    color: white;
+  }
+
+  .opcao.errada {
+    border-color: var(--erro);
+    background: var(--erro-bg);
+  }
+
+  .opcao.errada .letra {
+    background: var(--erro);
+    color: white;
+  }
+
+  .opcao.revelada-certa {
+    border-color: var(--verde2);
+    background: var(--certo-bg);
+    opacity: 0.7;
+  }
+
+  .opcao:disabled { cursor: default; }
+
+  /* FEEDBACK */
+  .feedback {
+    display: none;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: 1.65;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .feedback.certo {
+    background: var(--certo-bg);
+    border-left: 4px solid var(--verde);
+    color: #1a2e1a;
+  }
+
+  .feedback.errado {
+    background: var(--erro-bg);
+    border-left: 4px solid var(--erro);
+    color: #2a0a0a;
+  }
+
+  .feedback .titulo-feedback {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .feedback .fonte-feedback {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--cinza);
+    font-style: italic;
+  }
+
+  /* PONTOS GANHOS */
+  .pontos-ganhos {
+    display: none;
+    text-align: right;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .pontos-ganhos.certo { color: var(--verde); }
+  .pontos-ganhos.errado { color: var(--erro); }
+
+  .btn-proxima {
+    display: none;
+    background: var(--verde);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 36px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  .btn-proxima:hover {
+    background: var(--verde2);
+    transform: translateY(-1px);
+  }
+
+  /* TELA FINAL */
+  #tela-final {
+    display: none;
+    min-height: 100vh;
+    padding: 48px 20px;
+    background:
+      radial-gradient(ellipse at 30% 70%, #2D6A4F18 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 30%, #1B4F7218 0%, transparent 60%),
+      #FAFAF8;
+  }
+
+  .final-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .trofeu {
+    font-size: 72px;
+    margin-bottom: 16px;
+    animation: bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  @keyframes bounce {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .final-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 5vw, 40px);
+    font-weight: 900;
+    color: var(--verde);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .final-classificacao {
+    font-size: 18px;
+    color: var(--cinza);
+    margin-bottom: 32px;
+  }
+
+  .placar-final {
+    background: white;
+    border: 2px solid #E5E7EB;
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+
+  .pontuacao-grande {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--verde);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .pontuacao-label {
+    font-size: 15px;
+    color: var(--cinza);
+    margin-bottom: 24px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  .stat-num.verde { color: var(--verde); }
+  .stat-num.vermelho { color: var(--erro); }
+  .stat-num.dourado { color: var(--dourado); }
+
+  .stat-label { font-size: 12px; color: var(--cinza); margin-top: 2px; }
+
+  /* BARRA DE CATEGORIAS */
+  .categorias-resultado {
+    background: white;
+    border: 2px solid #E5E7EB;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    text-align: left;
+  }
+
+  .cat-titulo {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 16px;
+    color: #1a1a1a;
+  }
+
+  .cat-item {
+    margin-bottom: 14px;
+  }
+
+  .cat-nome {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  .cat-barra {
+    height: 8px;
+    background: #F3F4F6;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .cat-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease 0.3s;
+  }
+
+  .msg-final {
+    background: var(--verde-claro);
+    border-left: 4px solid var(--verde);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #1a2e1a;
+    margin-bottom: 24px;
+    text-align: left;
+  }
+
+  .btn-reiniciar {
+    background: var(--verde);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 40px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-right: 12px;
+  }
+
+  .btn-reiniciar:hover {
+    background: var(--verde2);
+    transform: translateY(-2px);
+  }
+
+  .rodape-quiz {
+    margin-top: 32px;
+    font-size: 11px;
+    color: var(--cinza);
+    line-height: 1.6;
+  }
+
+  /* DIVISOR */
+  .divisor-questao {
+    border: none;
+    border-top: 1px solid #E5E7EB;
+    margin: 28px 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- TELA INICIAL -->
+<div id="tela-inicio">
+  <div class="logo-reserva">🌿</div>
+  <h1 class="inicio-titulo">Você conhece a<br>Estação Ecológica<br>de Taiamã?</h1>
+  <p class="inicio-subtitulo">Quiz sobre a ampliação da reserva</p>
+  <p class="inicio-credito">Com base no Decreto Presidencial de 22 de março de 2026 e nos estudos técnicos do ICMBio</p>
+
+  <div class="inicio-info">
+    <div class="info-card">
+      <div class="num">15</div>
+      <div class="leg">perguntas</div>
+    </div>
+    <div class="info-card">
+      <div class="num">3</div>
+      <div class="leg">níveis</div>
+    </div>
+    <div class="info-card">
+      <div class="num">150</div>
+      <div class="leg">pontos possíveis</div>
+    </div>
+  </div>
+
+  <button class="btn-iniciar" onclick="iniciarQuiz()">Começar o Quiz</button>
+
+  <p class="aviso-fonte">Todas as informações são baseadas no Decreto Federal de ampliação (22 mar. 2026), nos estudos técnicos do ICMBio e em dados científicos publicados. Para público geral, gestores e estudantes.</p>
+</div>
+
+<!-- TELA DO QUIZ -->
+<div id="tela-quiz">
+  <div class="quiz-header">
+    <div class="quiz-header-inner">
+      <div class="quiz-logo">Quiz Taiamã</div>
+      <div class="quiz-progresso-wrap">
+        <div class="progresso-texto" id="progresso-texto">Questão 1 de 15</div>
+        <div class="barra-progresso">
+          <div class="barra-fill" id="barra-fill" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="quiz-pontos" id="placar-header">0 pts</div>
+    </div>
+  </div>
+
+  <div class="quiz-body">
+    <span class="nivel-badge" id="nivel-badge">Básico</span>
+    <div class="questao-num" id="questao-num">Questão 1</div>
+    <div class="questao-texto" id="questao-texto"></div>
+    <div class="opcoes" id="opcoes"></div>
+    <div class="pontos-ganhos" id="pontos-ganhos"></div>
+    <div class="feedback" id="feedback"></div>
+    <button class="btn-proxima" id="btn-proxima" onclick="proximaQuestao()">Próxima questão →</button>
+  </div>
+</div>
+
+<!-- TELA FINAL -->
+<div id="tela-final">
+  <div class="final-inner">
+    <div class="trofeu" id="trofeu">🏆</div>
+    <h2 class="final-titulo" id="final-titulo">Parabéns!</h2>
+    <p class="final-classificacao" id="final-classificacao"></p>
+
+    <div class="placar-final">
+      <div class="pontuacao-grande" id="pontuacao-grande">0</div>
+      <div class="pontuacao-label">pontos de 150 possíveis</div>
+      <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-num verde" id="stat-certas">0</div>
+          <div class="stat-label">certas</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num vermelho" id="stat-erradas">0</div>
+          <div class="stat-label">erradas</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num dourado" id="stat-percent">0%</div>
+          <div class="stat-label">aproveitamento</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="categorias-resultado" id="categorias-resultado"></div>
+
+    <div class="msg-final" id="msg-final"></div>
+
+    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+
+    <div class="rodape-quiz">
+      Baseado no Decreto Presidencial de 22 de março de 2026, nos estudos técnicos do ICMBio (Síntese de Estudos, ago. 2025) e em dados científicos publicados.<br>
+      Desenvolvido por pesquisadores do PPGCA e ProfÁgua — UNEMAT, Cáceres-MT.
+    </div>
+  </div>
+</div>
+
+<script>
+const questoes = [
+
+  // ─── BÁSICO (5 questões × 5 pts) ───
+  {
+    nivel: "basico",
+    categoria: "Decreto e criação",
+    pontos: 5,
+    texto: "Quando foi criada a Estação Ecológica de Taiamã originalmente?",
+    opcoes: [
+      "Em 2 de junho de 1981, pelo Decreto Federal n. 86.061",
+      "Em 5 de outubro de 1988, junto com a promulgação da Constituição",
+      "Em 22 de março de 2026, durante a COP15 das Espécies Migratórias",
+      "Em junho de 1992, durante a Conferência Rio-92 no Rio de Janeiro"
+    ],
+    correta: 0,
+    feedback_certo: "Correto! A ESEC Taiamã foi criada pelo Decreto Federal n. 86.061, de 2 de junho de 1981, com área original de 11.554,98 hectares.",
+    feedback_errado: "A ESEC Taiamã foi criada pelo Decreto Federal n. 86.061, de 2 de junho de 1981. A data de 2026 corresponde à ampliação, não à criação.",
+    fonte: "Decreto Federal n. 86.061, de 2 jun. 1981."
+  },
+
+  {
+    nivel: "basico",
+    categoria: "Decreto e criação",
+    pontos: 5,
+    texto: "Qual é o município onde fica a Estação Ecológica de Taiamã?",
+    opcoes: [
+      "Corumbá, no estado do Mato Grosso do Sul",
+      "Poconé, na região do Pantanal Norte de MT",
+      "Cáceres, no estado do Mato Grosso",
+      "Cuiabá, capital do estado do Mato Grosso"
+    ],
+    correta: 2,
+    feedback_certo: "Certo! A ESEC Taiamã está localizada no município de Cáceres, Mato Grosso, no Pantanal Norte.",
+    feedback_errado: "A ESEC Taiamã fica em Cáceres, Mato Grosso, no Pantanal Norte. Não se confunde com áreas de Corumbá (MS) ou Poconé (MT).",
+    fonte: "ICMBio — Estação Ecológica de Taiamã, ficha técnica."
+  },
+
+  {
+    nivel: "basico",
+    categoria: "Ampliação",
+    pontos: 5,
+    texto: "Quando foi assinado o decreto de ampliação da ESEC Taiamã?",
+    opcoes: [
+      "5 de junho de 2025, no Dia Mundial do Meio Ambiente em Brasília",
+      "22 de março de 2026, na COP15 das Espécies Migratórias em Campo Grande",
+      "1 de janeiro de 2023, na posse do novo governo federal em Brasília",
+      "15 de novembro de 2025, durante reunião do clima da ONU em Genebra"
+    ],
+    correta: 1,
+    feedback_certo: "Correto! O decreto foi assinado em 22 de março de 2026, durante o segmento de alto nível da COP15 da Convenção sobre Espécies Migratórias, em Campo Grande (MS).",
+    feedback_errado: "O decreto foi assinado em 22 de março de 2026, durante a COP15 das Espécies Migratórias (Campo Grande-MS).",
+    fonte: "MMA/ICMBio, Decreto Presidencial, 22 mar. 2026."
+  },
+
+  {
+    nivel: "basico",
+    categoria: "Tamanho e área",
+    pontos: 5,
+    texto: "De quantos hectares para quantos hectares a ESEC Taiamã foi ampliada?",
+    opcoes: [
+      "De aproximadamente 5.000 ha para cerca de 20.000 ha",
+      "De 11.554,98 ha para 68.500 ha, acréscimo de 56.945 ha",
+      "De aproximadamente 30.000 ha para cerca de 100.000 ha",
+      "De 11.554,98 ha para aproximadamente 200.000 ha"
+    ],
+    correta: 1,
+    feedback_certo: "Exato! A área saiu de 11.554,98 hectares para 68.500 hectares, um acréscimo de aproximadamente 56.945 hectares de proteção integral.",
+    feedback_errado: "A área passou de 11.554,98 ha para 68.500 ha, com acréscimo de 56.945 ha. São mais de 5 vezes a área original.",
+    fonte: "Decreto Presidencial, 22 mar. 2026; ICMBio — Síntese de Estudos Técnicos, ago. 2025."
+  },
+
+  {
+    nivel: "basico",
+    categoria: "Biodiversidade",
+    pontos: 5,
+    texto: "Quantas espécies de peixes foram identificadas na ESEC Taiamã pelos pesquisadores?",
+    opcoes: [
+      "32 espécies, segundo levantamento da UNEMAT",
+      "78 espécies, conforme inventário do ICMBio de 2020",
+      "131 espécies, equivalente a 48,33% do total do bioma Pantanal",
+      "240 espécies, incluindo espécies de rios vizinhos ao Pantanal"
+    ],
+    correta: 2,
+    feedback_certo: "Correto! Foram identificadas 131 espécies de peixes na ESEC Taiamã, o que corresponde a 48,33% de todas as espécies registradas para o bioma Pantanal.",
+    feedback_errado: "São 131 espécies de peixes, representando 48,33% de todo o Pantanal. A ESEC é um dos berçários mais importantes da bacia do Rio Paraguai.",
+    fonte: "ICMBio — Síntese de Estudos Técnicos, ESEC Taiamã, ago. 2025."
+  },
+
+  // ─── INTERMEDIÁRIO (5 questões × 10 pts) ───
+  {
+    nivel: "intermediario",
+    categoria: "Ecossistema e água",
+    pontos: 10,
+    texto: "O que o ICMBio diz sobre o tipo de terreno da área de ampliação da ESEC Taiamã?",
+    opcoes: [
+      "Terras de alta fertilidade, com aptidão para agricultura intensiva e pecuária de corte",
+      "Campos inundáveis com domínio de águas nas cheias e sem usos antrópicos identificados pelo ICMBio",
+      "Áreas urbanas e periurbanas subutilizadas situadas às margens do Rio Paraguai",
+      "Florestas tropicais densas, sem contato direto com as planícies do Rio Paraguai"
+    ],
+    correta: 1,
+    feedback_certo: "Correto! O ICMBio declarou na consulta pública (set. 2025) que a área é constituída principalmente por campos inundáveis, com domínio de águas nas cheias, sendo o uso do solo 'representado majoritariamente por elementos naturais da paisagem, sem usos antrópicos identificados'.",
+    feedback_errado: "O ICMBio declarou que a área é de campos inundáveis, com domínio de águas nas cheias, 'sem usos antrópicos identificados'. São solos com restrições ao uso agrícola.",
+    fonte: "ICMBio, Consulta Pública ESEC Taiamã, set. 2025; Síntese de Estudos Técnicos, ago. 2025."
+  },
+
+  {
+    nivel: "intermediario",
+    categoria: "Carbono e clima",
+    pontos: 10,
+    texto: "Qual é o estoque médio de carbono orgânico no solo em campos alagados como os da ESEC Taiamã?",
+    opcoes: [
+      "Menos de 10 toneladas de carbono orgânico por hectare de solo",
+      "Em torno de 20 toneladas de carbono orgânico por hectare de solo",
+      "44 toneladas de carbono orgânico por hectare, segundo MapBiomas/IPAM 2023",
+      "Mais de 200 toneladas de carbono orgânico por hectare de solo"
+    ],
+    correta: 2,
+    feedback_certo: "Correto! Os campos alagados do Pantanal armazenam em média 44 toneladas de carbono orgânico por hectare, valor superior à média geral do bioma (38 t/ha). Multiplicando pelos 68.500 ha da ESEC, o estoque total é de aproximadamente 3 milhões de toneladas de carbono.",
+    feedback_errado: "O valor correto é 44 toneladas por hectare em campos alagados, superior à média geral do Pantanal (38 t/ha). Um altíssimo estoque que, se destruído, seria liberado de forma irreversível.",
+    fonte: "MapBiomas 2023 (mapbiomas.org); IPAM 2023 (ipam.org.br)."
+  },
+
+  {
+    nivel: "intermediario",
+    categoria: "Água",
+    pontos: 10,
+    texto: "Qual foi a queda na superfície de água do Pantanal entre 1985 e 2024, segundo o MapBiomas?",
+    opcoes: [
+      "Queda de cerca de 10%, de 26% para aproximadamente 23% da área total do bioma",
+      "Queda de 61% ante a média histórica, chegando a apenas 3% de área coberta por água em 2024",
+      "Queda de 30%, partindo de 24% e chegando a cerca de 17% de área coberta por água",
+      "Não houve queda relevante, pois a variação é considerada normal pelo ciclo sazonal de chuvas"
+    ],
+    correta: 1,
+    feedback_certo: "Exato! Em 1985, a água cobria 24% do Pantanal. Em 2024, apenas 3%. Uma queda de 61% em relação à média histórica. O Pantanal foi o bioma com maior perda relativa de água no Brasil em 2024.",
+    feedback_errado: "A queda foi de 61% em relação à média histórica. A água passou de 24% (1985) para apenas 3% (2024) da superfície do bioma. O Pantanal foi o bioma mais afetado do Brasil.",
+    fonte: "MapBiomas Água, 21 mar. 2025 (brasil.mapbiomas.org)."
+  },
+
+  {
+    nivel: "intermediario",
+    categoria: "Biodiversidade",
+    pontos: 10,
+    texto: "Qual comportamento raro foi documentado por pesquisadores em onças-pintadas na ESEC Taiamã em 2021?",
+    opcoes: [
+      "Onças-pintadas caçando em grupos cooperativos de até cinco indivíduos",
+      "Onças-pintadas cruzando o Rio Paraguai a nado por distâncias superiores a 10 km",
+      "Onças-pintadas com comportamento especializado de pesca de peixes e jacarés no rio",
+      "Onças-pintadas utilizando galhos como ferramentas para abrir ninhos de pássaros"
+    ],
+    correta: 2,
+    feedback_certo: "Correto! Em 2021, pesquisadores identificaram na ESEC Taiamã uma população de onças-pintadas com comportamento especializado de pesca de peixes e jacarés, hábito raro ainda em investigação científica.",
+    feedback_errado: "Foi documentado que onças da ESEC Taiamã têm comportamento especializado de pesca de peixes e jacarés, hábito incomum ainda em investigação.",
+    fonte: "ICMBio — Síntese de Estudos Técnicos, ESEC Taiamã, ago. 2025; Agência Brasil, 24 mar. 2026."
+  },
+
+  {
+    nivel: "intermediario",
+    categoria: "Proteção legal",
+    pontos: 10,
+    texto: "O que diz o §3º do decreto de ampliação sobre a navegação na zona de amortecimento da ESEC Taiamã?",
+    opcoes: [
+      "Proíbe qualquer tipo de navegação tanto na área da ESEC quanto em seu entorno imediato",
+      "Permite a navegação exclusivamente para embarcações de órgãos do governo federal",
+      "Assegura a manutenção da navegabilidade e das políticas de hidrovias, conforme o plano de manejo",
+      "Suspende toda a navegação por um período de cinco anos para fins de recuperação ambiental"
+    ],
+    correta: 2,
+    feedback_certo: "Correto! O §3º assegura expressamente a manutenção da navegabilidade e a implementação das políticas públicas de hidrovias e portos, desde que executadas conforme o plano de manejo da área protegida e as normas ambientais aplicáveis.",
+    feedback_errado: "O §3º do decreto garante a navegação. Ele diz que ficam asseguradas 'as ações de manutenção da navegabilidade e de implementação das políticas públicas de hidrovias e de portos', conforme o plano de manejo.",
+    fonte: "Decreto Presidencial de ampliação da ESEC Taiamã, 22 mar. 2026, §3º."
+  },
+
+  // ─── AVANÇADO (5 questões × 20 pts) ───
+  {
+    nivel: "avancado",
+    categoria: "Proteção do bioma",
+    pontos: 20,
+    texto: "Qual era o percentual de áreas protegidas no Pantanal antes da ampliação da ESEC Taiamã, comparado à Amazônia?",
+    opcoes: [
+      "Pantanal: aproximadamente 15% protegido por UCs; Amazônia: 28% protegido por UCs",
+      "Pantanal: apenas 4,5% protegido por UCs; Amazônia: 28% protegido, o menor índice entre os biomas",
+      "Pantanal: 30% protegido por UCs, já na meta global; Amazônia: 30% protegido por UCs",
+      "Pantanal: cerca de 10% protegido por UCs federais; Amazônia: 50% protegido por UCs"
+    ],
+    correta: 1,
+    feedback_certo: "Correto! Antes da ampliação, apenas 4,5% do Pantanal estava protegido por unidades de conservação, enquanto a Amazônia tem 28% protegido. O Pantanal é o bioma brasileiro com menor percentual de áreas protegidas.",
+    feedback_errado: "O Pantanal tinha apenas 4,5% protegido antes da ampliação, o menor percentual entre todos os biomas brasileiros. A Amazônia, para comparação, tem 28% protegido.",
+    fonte: "O Eco, 23 mar. 2026 (oeco.org.br); SOS Pantanal, 2026 (sospantanal.org.br)."
+  },
+
+  {
+    nivel: "avancado",
+    categoria: "Carbono e clima",
+    pontos: 20,
+    texto: "Qual é o estoque total estimado de CO₂ equivalente armazenado no solo dos 68.500 ha da ESEC Taiamã ampliada?",
+    opcoes: [
+      "Aproximadamente 500 mil toneladas de CO₂ equivalente no solo da ESEC",
+      "Aproximadamente 3 milhões de toneladas de CO₂ equivalente, valor do carbono puro no solo",
+      "Aproximadamente 11 milhões de toneladas de CO₂ equivalente, calculado pela conversão do carbono do solo",
+      "Aproximadamente 100 milhões de toneladas de CO₂ equivalente armazenadas no solo da ESEC"
+    ],
+    correta: 2,
+    feedback_certo: "Exato! O cálculo é: 68.500 ha × 44 t C/ha = 3.014.000 t de carbono. Multiplicando por 3,67 (para converter para CO₂ equivalente), chegamos a aproximadamente 11 milhões de toneladas de CO₂eq. Se destruído, esse carbono seria liberado de forma irreversível.",
+    feedback_errado: "O cálculo correto: 68.500 ha × 44 tC/ha = ~3 milhões t C × 3,67 = ~11 milhões de toneladas de CO₂eq. Um patrimônio climático global que, uma vez destruído, não se recupera.",
+    fonte: "MapBiomas/IPAM 2023; UEMS/Embrapa Carbopan, nov. 2025."
+  },
+
+  {
+    nivel: "avancado",
+    categoria: "Ecossistema e água",
+    pontos: 20,
+    texto: "Qual fenômeno ecológico essencial do Pantanal a ESEC Taiamã ajuda a proteger, e do que ele depende?",
+    opcoes: [
+      "O ciclo das queimadas controladas, que depende de ventos secos vindos do cerrado vizinho",
+      "O pulso de inundação, fenômeno hidrológico sazonal que regula a biodiversidade pantaneira",
+      "O corredor de migração de pássaros, que depende da temperatura média do solo pantaneiro",
+      "O florescimento sazonal das macrófitas aquáticas, que depende de solo arenoso e pobre em matéria orgânica"
+    ],
+    correta: 1,
+    feedback_certo: "Correto! O pulso de inundação é o fenômeno hidrológico que determina toda a dinâmica biológica do Pantanal, desde a reprodução de peixes até o forrageamento de grandes mamíferos. A ESEC Taiamã, com sua extensa planície inundável, é fundamental para manter esse pulso.",
+    feedback_errado: "O fenômeno central é o pulso de inundação, que regula toda a biodiversidade pantaneira: reprodução de peixes, migração de aves, alimentação de mamíferos. Sem planícies conservadas, o pulso se perde.",
+    fonte: "MMA/ICMBio, Decreto de ampliação, 22 mar. 2026; ICMBio — Síntese de Estudos, ago. 2025."
+  },
+
+  {
+    nivel: "avancado",
+    categoria: "Solos e aptidão",
+    pontos: 20,
+    texto: "Segundo o estudo técnico do ICMBio (ago. 2025), qual é a característica dos solos da área de ampliação da ESEC Taiamã?",
+    opcoes: [
+      "Latossolos profundos e bem drenados, com alta fertilidade natural e boa aptidão para uso agrícola",
+      "Planossolos e Plintossolos com hidromorfismo sazonal e restrições ao uso agrícola, segundo o ICMBio",
+      "Solos arenosos e sem cobertura vegetal, resultado de processos históricos de erosão fluvial intensa",
+      "Solos com histórico de uso urbano e industrial, com contaminação detectada por metais pesados"
+    ],
+    correta: 1,
+    feedback_certo: "Correto! O estudo técnico do ICMBio (ago. 2025) descreve que os solos da área de ampliação são Planossolos e Plintossolos, com forte relação com o regime hídrico sazonal e hidromorfismo. O documento afirma literalmente que esses solos possuem 'restrições ao uso agrícola'.",
+    feedback_errado: "São Planossolos e Plintossolos com hidromorfismo e restrições ao uso agrícola, segundo o próprio estudo técnico do ICMBio. Isso significa que a área não tem aptidão para pecuária ou agricultura em escala.",
+    fonte: "ICMBio — Síntese de Estudos Técnicos, ESEC Taiamã, ago. 2025, p. 47."
+  },
+
+  {
+    nivel: "avancado",
+    categoria: "Biodiversidade",
+    pontos: 20,
+    texto: "De acordo com o estudo técnico do ICMBio, como foram definidos os limites da área de ampliação em relação à pesca?",
+    opcoes: [
+      "Os limites desconsideraram as áreas de pesca tradicionais, gerando conflito direto com as colônias de pescadores",
+      "Os limites excluem baías próximas a áreas de uso pesqueiro, respeitando as zonas de pesca já existentes",
+      "Os limites estabelecem proibição de toda e qualquer atividade de pesca dentro e no entorno da ESEC",
+      "Os limites foram traçados sem qualquer consulta prévia a pescadores ou representantes do setor pesqueiro"
+    ],
+    correta: 1,
+    feedback_certo: "Correto! O estudo técnico do ICMBio (ago. 2025) afirma que a ampliação 'retira algumas baías ao sul da poligonal que estão próximas a áreas de uso pesqueiro'. Os limites foram ajustados deliberadamente para respeitar as zonas de pesca.",
+    feedback_errado: "O próprio ICMBio ajustou os limites para excluir baías próximas às áreas de uso pesqueiro. O estudo técnico documenta esse cuidado explicitamente.",
+    fonte: "ICMBio — Síntese de Estudos Técnicos, ESEC Taiamã, ago. 2025."
+  }
+
+];
+
+// Estado do quiz
+let questaoAtual = 0;
+let pontuacao = 0;
+let certas = 0;
+let erradas = 0;
+let categoriasPontos = {};
+let categoriasTotais = {};
+
+function iniciarQuiz() {
+  document.getElementById('tela-inicio').style.display = 'none';
+  document.getElementById('tela-quiz').style.display = 'block';
+  mostrarQuestao();
+}
+
+function mostrarQuestao() {
+  const q = questoes[questaoAtual];
+  const total = questoes.length;
+
+  // Progresso
+  document.getElementById('progresso-texto').textContent = `Questão ${questaoAtual + 1} de ${total}`;
+  document.getElementById('barra-fill').style.width = `${(questaoAtual / total) * 100}%`;
+  document.getElementById('placar-header').textContent = `${pontuacao} pts`;
+
+  // Nível
+  const badge = document.getElementById('nivel-badge');
+  const nivelMap = { basico: 'Básico', intermediario: 'Intermediário', avancado: 'Avançado' };
+  const nivelClassMap = { basico: 'nivel-basico', intermediario: 'nivel-intermediario', avancado: 'nivel-avancado' };
+  badge.textContent = nivelMap[q.nivel];
+  badge.className = `nivel-badge ${nivelClassMap[q.nivel]}`;
+
+  document.getElementById('questao-num').textContent = `Questão ${questaoAtual + 1} — ${q.pontos} ${q.pontos === 1 ? 'ponto' : 'pontos'}`;
+  document.getElementById('questao-texto').textContent = q.texto;
+
+  // Opções
+  const opcoes = document.getElementById('opcoes');
+  opcoes.innerHTML = '';
+  const letras = ['A', 'B', 'C', 'D'];
+  q.opcoes.forEach((opcao, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opcao';
+    btn.innerHTML = `<span class="letra">${letras[i]}</span><span>${opcao}</span>`;
+    btn.onclick = () => responder(i);
+    opcoes.appendChild(btn);
+  });
+
+  // Limpar estados anteriores
+  document.getElementById('feedback').style.display = 'none';
+  document.getElementById('btn-proxima').style.display = 'none';
+  document.getElementById('pontos-ganhos').style.display = 'none';
+}
+
+function responder(escolha) {
+  const q = questoes[questaoAtual];
+  const opcoesBtns = document.querySelectorAll('.opcao');
+
+  // Desabilitar todas
+  opcoesBtns.forEach(btn => btn.disabled = true);
+
+  const acertou = escolha === q.correta;
+
+  // Feedback visual nas opções
+  opcoesBtns[escolha].classList.add(acertou ? 'correta' : 'errada');
+  if (!acertou) {
+    opcoesBtns[q.correta].classList.add('revelada-certa');
+  }
+
+  // Pontuação
+  if (acertou) {
+    pontuacao += q.pontos;
+    certas++;
+  } else {
+    erradas++;
+  }
+
+  // Categorias
+  if (!categoriasTotais[q.categoria]) {
+    categoriasTotais[q.categoria] = 0;
+    categoriasPontos[q.categoria] = 0;
+  }
+  categoriasTotais[q.categoria] += q.pontos;
+  if (acertou) categoriasPontos[q.categoria] += q.pontos;
+
+  // Mostrar pontos ganhos
+  const pgEl = document.getElementById('pontos-ganhos');
+  pgEl.textContent = acertou ? `+${q.pontos} pontos!` : `0 pontos`;
+  pgEl.className = `pontos-ganhos ${acertou ? 'certo' : 'errado'}`;
+  pgEl.style.display = 'block';
+
+  // Mostrar feedback
+  const fb = document.getElementById('feedback');
+  fb.className = `feedback ${acertou ? 'certo' : 'errado'}`;
+  fb.innerHTML = `
+    <div class="titulo-feedback">${acertou ? '✓ Correto!' : '✗ Resposta incorreta'}</div>
+    ${acertou ? q.feedback_certo : q.feedback_errado}
+    <div class="fonte-feedback">Fonte: ${q.fonte}</div>
+  `;
+  fb.style.display = 'block';
+
+  // Atualizar placar
+  document.getElementById('placar-header').textContent = `${pontuacao} pts`;
+
+  // Botão próxima
+  const btnProx = document.getElementById('btn-proxima');
+  btnProx.style.display = 'block';
+  btnProx.textContent = questaoAtual < questoes.length - 1 ? 'Próxima questão →' : 'Ver resultado final';
+}
+
+function proximaQuestao() {
+  questaoAtual++;
+  if (questaoAtual < questoes.length) {
+    mostrarQuestao();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    mostrarResultado();
+  }
+}
+
+function mostrarResultado() {
+  document.getElementById('tela-quiz').style.display = 'none';
+  document.getElementById('tela-final').style.display = 'block';
+
+  const total = questoes.length;
+  const maxPontos = questoes.reduce((a, q) => a + q.pontos, 0);
+  const pct = Math.round((pontuacao / maxPontos) * 100);
+
+  // Trofeu e classificação
+  let trofeu, titulo, classificacao, msg;
+  if (pct >= 90) {
+    trofeu = '🏆'; titulo = 'Especialista em Taiamã!';
+    classificacao = 'Você domina o assunto com excelência.';
+    msg = `Parabéns! Com ${pct}% de aproveitamento, você está entre os que realmente conhecem a ESEC Taiamã. O Pantanal precisa de pessoas assim: informadas, atentas e comprometidas com a conservação. Compartilhe esse conhecimento!`;
+  } else if (pct >= 70) {
+    trofeu = '🥇'; titulo = 'Muito bem informado!';
+    classificacao = 'Conhecimento sólido sobre a reserva.';
+    msg = `Com ${pct}% de aproveitamento, você tem um bom domínio sobre a ampliação da ESEC Taiamã. Vale revisar os pontos em que errou — cada detalhe importa quando o assunto é o futuro do Pantanal.`;
+  } else if (pct >= 50) {
+    trofeu = '🥈'; titulo = 'Conhecimento intermediário';
+    classificacao = 'Você sabe o básico, mas há mais para aprender.';
+    msg = `${pct}% de aproveitamento. Você conhece a história da ESEC Taiamã, mas ainda há pontos importantes a explorar. Leia o decreto de ampliação (22 mar. 2026) e os estudos do ICMBio — as respostas estão nos documentos oficiais.`;
+  } else {
+    trofeu = '🌱'; titulo = 'Um começo promissor!';
+    classificacao = 'O Pantanal tem muito a te ensinar.';
+    msg = `${pct}% de aproveitamento. O Pantanal guarda mais segredos do que qualquer pessoa imagina. Não se preocupe com o resultado — o importante é que agora você sabe o que ainda precisa aprender sobre a maior planície inundável do mundo.`;
+  }
+
+  document.getElementById('trofeu').textContent = trofeu;
+  document.getElementById('final-titulo').textContent = titulo;
+  document.getElementById('final-classificacao').textContent = classificacao;
+  document.getElementById('pontuacao-grande').textContent = pontuacao;
+  document.getElementById('stat-certas').textContent = certas;
+  document.getElementById('stat-erradas').textContent = erradas;
+  document.getElementById('stat-percent').textContent = pct + '%';
+  document.getElementById('msg-final').textContent = msg;
+
+  // Categorias
+  const catDiv = document.getElementById('categorias-resultado');
+  const cores = {
+    'Decreto e criação': '#1B4F72',
+    'Ampliação': '#2D6A4F',
+    'Tamanho e área': '#40916C',
+    'Biodiversidade': '#C9A84C',
+    'Ecossistema e água': '#2E86AB',
+    'Carbono e clima': '#5C4033',
+    'Proteção legal': '#6A1B9A',
+    'Proteção do bioma': '#2D6A4F',
+    'Solos e aptidão': '#795548',
+  };
+
+  let html = '<div class="cat-titulo">Desempenho por tema</div>';
+  for (const cat in categoriasTotais) {
+    const p = categoriasPontos[cat] || 0;
+    const t = categoriasTotais[cat];
+    const pctCat = Math.round((p / t) * 100);
+    const cor = cores[cat] || '#2D6A4F';
+    html += `
+      <div class="cat-item">
+        <div class="cat-nome"><span>${cat}</span><span>${p}/${t} pts (${pctCat}%)</span></div>
+        <div class="cat-barra"><div class="cat-fill" style="width:${pctCat}%;background:${cor}"></div></div>
+      </div>`;
+  }
+  catDiv.innerHTML = html;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function reiniciar() {
+  questaoAtual = 0;
+  pontuacao = 0;
+  certas = 0;
+  erradas = 0;
+  categoriasPontos = {};
+  categoriasTotais = {};
+  document.getElementById('tela-final').style.display = 'none';
+  document.getElementById('tela-quiz').style.display = 'block';
+  mostrarQuestao();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
