@@ -714,17 +714,17 @@ const questoes = [
     nivel: "basico",
     categoria: "Decreto e criação",
     pontos: 5,
-    texto: "Qual é o município onde fica a Estação Ecológica de Taiamã?",
+    texto: "Em quais municípios fica a Estação Ecológica de Taiamã depois da ampliação?",
     opcoes: [
-      "Corumbá, no estado do Mato Grosso do Sul",
-      "Poconé, na região do Pantanal Norte de MT",
-      "Cáceres, no estado do Mato Grosso",
-      "Cuiabá, capital do estado do Mato Grosso"
+      "Corumbá e Ladário, em Mato Grosso do Sul",
+      "Barão de Melgaço e Santo Antônio de Leverger",
+      "Cáceres e Poconé, ambos em Mato Grosso",
+      "Cuiabá e Várzea Grande, em Mato Grosso"
     ],
     correta: 2,
-    feedback_certo: "Certo! A ESEC Taiamã está localizada no município de Cáceres, Mato Grosso, no Pantanal Norte.",
-    feedback_errado: "A ESEC Taiamã fica em Cáceres, Mato Grosso, no Pantanal Norte. Não se confunde com áreas de Corumbá (MS) ou Poconé (MT).",
-    fonte: "ICMBio — Estação Ecológica de Taiamã, ficha técnica."
+    feedback_certo: "Certo! A ESEC Taiamã nasceu em Cáceres. Com a ampliação de 2026, a área passou a abranger também Poconé, ambos em Mato Grosso.",
+    feedback_errado: "A ESEC Taiamã fica em Cáceres e, depois da ampliação de 2026, também em Poconé, ambos em Mato Grosso.",
+    fonte: "Decreto nº 12.887, de 23 mar. 2026; ICMBio — ficha técnica da ESEC Taiamã."
   },
 
   {
@@ -734,14 +734,14 @@ const questoes = [
     texto: "Quando foi assinado o decreto de ampliação da ESEC Taiamã?",
     opcoes: [
       "5 de junho de 2025, no Dia Mundial do Meio Ambiente em Brasília",
-      "22 de março de 2026, na COP15 das Espécies Migratórias em Campo Grande",
+      "22 de março de 2026, na COP15 em Campo Grande (MS)",
       "1 de janeiro de 2023, na posse do novo governo federal em Brasília",
       "15 de novembro de 2025, durante reunião do clima da ONU em Genebra"
     ],
     correta: 1,
     feedback_certo: "Correto! O decreto foi assinado em 22 de março de 2026, durante o segmento de alto nível da COP15 da Convenção sobre Espécies Migratórias, em Campo Grande (MS).",
     feedback_errado: "O decreto foi assinado em 22 de março de 2026, durante a COP15 das Espécies Migratórias (Campo Grande-MS).",
-    fonte: "MMA/ICMBio, Decreto Presidencial, 22 mar. 2026."
+    fonte: "Decreto nº 12.887, assinado em 22 mar. 2026 na COP15 e publicado em 23 mar. 2026."
   },
 
   {
@@ -751,14 +751,14 @@ const questoes = [
     texto: "De quantos hectares para quantos hectares a ESEC Taiamã foi ampliada?",
     opcoes: [
       "De aproximadamente 5.000 ha para cerca de 20.000 ha",
-      "De 11.554,98 ha para 68.500 ha, acréscimo de 56.945 ha",
+      "De 11.554,98 ha para cerca de 68.502 ha",
       "De aproximadamente 30.000 ha para cerca de 100.000 ha",
-      "De 11.554,98 ha para aproximadamente 200.000 ha"
+      "De 11.554,98 ha para cerca de 200.000 ha"
     ],
     correta: 1,
-    feedback_certo: "Exato! A área saiu de 11.554,98 hectares para 68.500 hectares, um acréscimo de aproximadamente 56.945 hectares de proteção integral.",
-    feedback_errado: "A área passou de 11.554,98 ha para 68.500 ha, com acréscimo de 56.945 ha. São mais de 5 vezes a área original.",
-    fonte: "Decreto Presidencial, 22 mar. 2026; ICMBio — Síntese de Estudos Técnicos, ago. 2025."
+    feedback_certo: "Exato! A área saiu de 11.554,98 hectares para cerca de 68.502 hectares, um acréscimo de 56.959 hectares de proteção integral.",
+    feedback_errado: "A área passou de 11.554,98 ha para cerca de 68.502 ha, com acréscimo de 56.959 ha. É quase seis vezes a área original.",
+    fonte: "Decreto nº 12.887, de 23 mar. 2026."
   },
 
   {
@@ -767,9 +767,9 @@ const questoes = [
     pontos: 5,
     texto: "Quantas espécies de peixes foram identificadas na ESEC Taiamã pelos pesquisadores?",
     opcoes: [
-      "32 espécies, segundo levantamento da UNEMAT",
+      "32 espécies, quase todas de pequeno porte",
       "78 espécies, conforme inventário do ICMBio de 2020",
-      "131 espécies, equivalente a 48,33% do total do bioma Pantanal",
+      "131 espécies, quase metade das registradas no Pantanal",
       "240 espécies, incluindo espécies de rios vizinhos ao Pantanal"
     ],
     correta: 2,
@@ -786,7 +786,7 @@ const questoes = [
     texto: "O que o ICMBio diz sobre o tipo de terreno da área de ampliação da ESEC Taiamã?",
     opcoes: [
       "Terras de alta fertilidade, com aptidão para agricultura intensiva e pecuária de corte",
-      "Campos inundáveis com domínio de águas nas cheias e sem usos antrópicos identificados pelo ICMBio",
+      "Campos inundáveis, dominados pela água na cheia e sem usos humanos identificados",
       "Áreas urbanas e periurbanas subutilizadas situadas às margens do Rio Paraguai",
       "Florestas tropicais densas, sem contato direto com as planícies do Rio Paraguai"
     ],
@@ -800,33 +800,33 @@ const questoes = [
     nivel: "intermediario",
     categoria: "Carbono e clima",
     pontos: 10,
-    texto: "Qual é o estoque médio de carbono orgânico no solo em campos alagados como os da ESEC Taiamã?",
+    texto: "Segundo o MapBiomas Solo, qual é o estoque médio de carbono orgânico nos primeiros 30 cm do solo do Pantanal?",
     opcoes: [
-      "Menos de 10 toneladas de carbono orgânico por hectare de solo",
-      "Em torno de 20 toneladas de carbono orgânico por hectare de solo",
-      "44 toneladas de carbono orgânico por hectare, segundo MapBiomas/IPAM 2023",
-      "Mais de 200 toneladas de carbono orgânico por hectare de solo"
+      "Menos de 10 toneladas de carbono por hectare",
+      "Cerca de 20 toneladas de carbono por hectare",
+      "Cerca de 38 toneladas de carbono por hectare",
+      "Mais de 200 toneladas de carbono por hectare"
     ],
     correta: 2,
-    feedback_certo: "Correto! Os campos alagados do Pantanal armazenam em média 44 toneladas de carbono orgânico por hectare, valor superior à média geral do bioma (38 t/ha). Multiplicando pelos 68.500 ha da ESEC, o estoque total é de aproximadamente 3 milhões de toneladas de carbono.",
-    feedback_errado: "O valor correto é 44 toneladas por hectare em campos alagados, superior à média geral do Pantanal (38 t/ha). Um altíssimo estoque que, se destruído, seria liberado de forma irreversível.",
-    fonte: "MapBiomas 2023 (mapbiomas.org); IPAM 2023 (ipam.org.br)."
+    feedback_certo: "Correto! O MapBiomas Solo estimou em média 38 toneladas de carbono orgânico por hectare nos primeiros 30 cm do solo do Pantanal. É o segundo menor valor entre os biomas, à frente só da Caatinga, mas o bioma inteiro guarda cerca de 0,6 bilhão de toneladas.",
+    feedback_errado: "O MapBiomas Solo estimou cerca de 38 toneladas de carbono orgânico por hectare nos primeiros 30 cm do solo do Pantanal, em média. Áreas mais úmidas podem ter valores diferentes da média.",
+    fonte: "MapBiomas Solo, coleção beta, jun. 2023 (dados de 2021, 0 a 30 cm)."
   },
 
   {
     nivel: "intermediario",
     categoria: "Água",
     pontos: 10,
-    texto: "Qual foi a queda na superfície de água do Pantanal entre 1985 e 2024, segundo o MapBiomas?",
+    texto: "Segundo o MapBiomas Água, como ficou a superfície de água do Pantanal em 2024?",
     opcoes: [
-      "Queda de cerca de 10%, de 26% para aproximadamente 23% da área total do bioma",
-      "Queda de 61% ante a média histórica, chegando a apenas 3% de área coberta por água em 2024",
-      "Queda de 30%, partindo de 24% e chegando a cerca de 17% de área coberta por água",
-      "Não houve queda relevante, pois a variação é considerada normal pelo ciclo sazonal de chuvas"
+      "Cerca de 10% abaixo da média histórica, com 3 milhões de hectares de água",
+      "Cerca de 61% abaixo da média histórica, com 366 mil hectares de água",
+      "Cerca de 30% abaixo da média histórica, com 1 milhão de hectares de água",
+      "Acima da média histórica, por causa das chuvas fortes no planalto"
     ],
     correta: 1,
-    feedback_certo: "Exato! Em 1985, a água cobria 24% do Pantanal. Em 2024, apenas 3%. Uma queda de 61% em relação à média histórica. O Pantanal foi o bioma com maior perda relativa de água no Brasil em 2024.",
-    feedback_errado: "A queda foi de 61% em relação à média histórica. A água passou de 24% (1985) para apenas 3% (2024) da superfície do bioma. O Pantanal foi o bioma mais afetado do Brasil.",
+    feedback_certo: "Exato! Em 2024 o Pantanal teve 366 mil hectares de superfície de água, 61% abaixo da média histórica desde 1985. Foi o bioma brasileiro que mais perdeu água em relação à média e ficou abaixo dela nos 12 meses do ano.",
+    feedback_errado: "Em 2024 o Pantanal teve 366 mil hectares de água, 61% abaixo da média histórica desde 1985. Foi o bioma mais afetado do Brasil.",
     fonte: "MapBiomas Água, 21 mar. 2025 (brasil.mapbiomas.org)."
   },
 
@@ -855,7 +855,7 @@ const questoes = [
     opcoes: [
       "Proíbe qualquer tipo de navegação tanto na área da ESEC quanto em seu entorno imediato",
       "Permite a navegação exclusivamente para embarcações de órgãos do governo federal",
-      "Assegura a manutenção da navegabilidade e das políticas de hidrovias, conforme o plano de manejo",
+      "Garante a navegabilidade e as políticas de hidrovias, conforme o plano de manejo",
       "Suspende toda a navegação por um período de cinco anos para fins de recuperação ambiental"
     ],
     correta: 2,
@@ -871,10 +871,10 @@ const questoes = [
     pontos: 20,
     texto: "Qual era o percentual de áreas protegidas no Pantanal antes da ampliação da ESEC Taiamã, comparado à Amazônia?",
     opcoes: [
-      "Pantanal: aproximadamente 15% protegido por UCs; Amazônia: 28% protegido por UCs",
-      "Pantanal: apenas 4,5% protegido por UCs; Amazônia: 28% protegido, o menor índice entre os biomas",
-      "Pantanal: 30% protegido por UCs, já na meta global; Amazônia: 30% protegido por UCs",
-      "Pantanal: cerca de 10% protegido por UCs federais; Amazônia: 50% protegido por UCs"
+      "Pantanal: cerca de 15% protegido por UCs; Amazônia: cerca de 28%",
+      "Pantanal: cerca de 4,5% protegido por UCs; Amazônia: cerca de 28%",
+      "Pantanal: 30% protegido, já na meta global; Amazônia: cerca de 30%",
+      "Pantanal: cerca de 10% protegido por UCs; Amazônia: cerca de 50%"
     ],
     correta: 1,
     feedback_certo: "Correto! Antes da ampliação, apenas 4,5% do Pantanal estava protegido por unidades de conservação, enquanto a Amazônia tem 28% protegido. O Pantanal é o bioma brasileiro com menor percentual de áreas protegidas.",
@@ -886,17 +886,17 @@ const questoes = [
     nivel: "avancado",
     categoria: "Carbono e clima",
     pontos: 20,
-    texto: "Qual é o estoque total estimado de CO₂ equivalente armazenado no solo dos 68.500 ha da ESEC Taiamã ampliada?",
+    texto: "Usando a média do MapBiomas para o Pantanal (38 t de carbono por hectare), quanto CO₂ o solo dos 68.502 ha da ESEC ampliada guardaria, em ordem de grandeza?",
     opcoes: [
-      "Aproximadamente 500 mil toneladas de CO₂ equivalente no solo da ESEC",
-      "Aproximadamente 3 milhões de toneladas de CO₂ equivalente, valor do carbono puro no solo",
-      "Aproximadamente 11 milhões de toneladas de CO₂ equivalente, calculado pela conversão do carbono do solo",
-      "Aproximadamente 100 milhões de toneladas de CO₂ equivalente armazenadas no solo da ESEC"
+      "Cerca de 500 mil toneladas de CO₂",
+      "Cerca de 2,6 milhões de toneladas de CO₂",
+      "Cerca de 9,5 milhões de toneladas de CO₂",
+      "Cerca de 100 milhões de toneladas de CO₂"
     ],
     correta: 2,
-    feedback_certo: "Exato! O cálculo é: 68.500 ha × 44 t C/ha = 3.014.000 t de carbono. Multiplicando por 3,67 (para converter para CO₂ equivalente), chegamos a aproximadamente 11 milhões de toneladas de CO₂eq. Se destruído, esse carbono seria liberado de forma irreversível.",
-    feedback_errado: "O cálculo correto: 68.500 ha × 44 tC/ha = ~3 milhões t C × 3,67 = ~11 milhões de toneladas de CO₂eq. Um patrimônio climático global que, uma vez destruído, não se recupera.",
-    fonte: "MapBiomas/IPAM 2023; UEMS/Embrapa Carbopan, nov. 2025."
+    feedback_certo: "Exato! 68.502 ha × 38 t C/ha dá cerca de 2,6 milhões de toneladas de carbono. Multiplicando por 3,67 (a razão entre as massas de CO₂ e de C), chega-se a cerca de 9,5 milhões de toneladas de CO₂. É uma estimativa grosseira, feita com a média do bioma.",
+    feedback_errado: "O cálculo: 68.502 ha × 38 t C/ha ≈ 2,6 milhões t de carbono. Vezes 3,67 ≈ 9,5 milhões t de CO₂. A alternativa de 2,6 milhões é o carbono, ainda não convertido em CO₂.",
+    fonte: "Cálculo a partir do MapBiomas Solo (coleção beta, 2023) e do Decreto nº 12.887/2026."
   },
 
   {
@@ -1024,6 +1024,7 @@ function responder(escolha) {
     certas++;
   } else {
     erradas++;
+    pontuacao = Math.max(0, pontuacao - Math.round(q.pontos / 2));
   }
 
   // Categorias
@@ -1036,7 +1037,7 @@ function responder(escolha) {
 
   // Mostrar pontos ganhos
   const pgEl = document.getElementById('pontos-ganhos');
-  pgEl.textContent = acertou ? `+${q.pontos} pontos!` : `0 pontos`;
+  pgEl.textContent = acertou ? `+${q.pontos} pontos!` : `−${Math.round(q.pontos / 2)} pontos`;
   pgEl.className = `pontos-ganhos ${acertou ? 'certo' : 'errado'}`;
   pgEl.style.display = 'block';
 
